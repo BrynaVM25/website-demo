@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/img/logo.svg" type="image/x-icon" id="favicon">
+    <link rel="stylesheet" href="/config/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Vega | Diseñador Gráfico</title>
+</head>
+
+<script>
+    const tituloOriginal = document.title;
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        document.title = " Hey!! Vuelve 😢";
+      } else {
+        document.title = tituloOriginal;
+      }
+    });
+</script>
+
+<body>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <script>
+    (() => {
+    const cursor = document.querySelector('.cursor');
+    if (!cursor) return;
+
+  let x = window.innerWidth / 2, y = window.innerHeight / 2;   // objetivo
+  let cx = x, cy = y;                                          // posición interpolada
+  const speed = 0.2;                                           // suavizado (0.1 - 0.3)
+
+  // Seguir mouse
+  window.addEventListener('mousemove', (e) => {
+    x = e.clientX; y = e.clientY;
+    cursor.classList.remove('cursor--hidden');
+  });
+
+  // Ocultar cuando salga de la ventana
+  window.addEventListener('mouseleave', () => {
+    cursor.classList.add('cursor--hidden');
+  });
+
+  // Click feedback
+  window.addEventListener('mousedown', () => cursor.classList.add('cursor--down'));
+  window.addEventListener('mouseup',   () => cursor.classList.remove('cursor--down'));
+
+  // Detectar elementos “interactivos” para agrandar el cursor
+  const interactiveSelector = 'a, button, [role="button"], input, textarea, select, .hero, .sub-hero';
+  const setHoverClass = (el, on) => {
+    if (!el) return;
+    if (on) cursor.classList.add('cursor--hover');
+    else    cursor.classList.remove('cursor--hover');
+  };
+
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelector)) setHoverClass(e.target, true);
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelector)) setHoverClass(e.target, false);
+  });
+
+  // Animación (lerp)
+  function raf() {
+    cx += (x - cx) * speed;
+    cy += (y - cy) * speed;
+    cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+    requestAnimationFrame(raf);
+  }
+  raf();
+
+  // Ocultar en pantallas táctiles
+  const hideOnTouch = () => cursor.style.display = 'none';
+  window.addEventListener('touchstart', hideOnTouch, { once: true });
+})();
+</script>
+
+    <header>
+        <div class="logo" style="background-image: url(/img/logo.svg); background-size: contain; background-repeat: no-repeat;"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="works.html">Trabajos</a></li>
+                <li><a href="#services">Servicios</a></li>
+            </ul>
+        </nav>
+        <div class="boton-header"><span> <a href="#contact" class="texto-boton">Contactar</a></span></div>
+    </header>
+
+<main class="main">
+  <div class="content">
+    <!-- contenido superior aquí -->
+      <div class="video-container">
+            <video src="/img/videointro.mp4" muted loop></video>
+      </div>
+  </div>
+
+  <div class="sub-hero">
+    <span class="heroimg2">SIMPLE</span>
+    <span class="heroimg2">SMART</span>
+    <span class="heroimg2">SUPER</span>
+  </div>
+
+  <section class="hero">
+    <div class="mask">
+      <img src="img/Recurso 2.webp" class="heroimg" />
+    </div>
+    <div class="mask">
+      <img src="img/Recurso 3.webp" class="heroimg" />
+    </div>
+  </section>
+</main>
+
+    <section class="section-video">
+      
+    </section>
+
+
+    <section class="about-me">
+
+        <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi molestias, deserunt omnis velit ullam, nemo suscipit mollitia quos quo assumenda quasi accusamus provident odio dignissimos temporibus tempore soluta est quae.</h3>
+
+    </section>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="/config/script.js"></script>
+
+</html>
